@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load tags %}
+
+
+{% block content %}
+    <div class="goal">
+        {% if goal.created_date %}
+            <div class="date">
+                {{ goal.created_date }}
+            </div>
+        {% endif %}
+        {% if user.is_authenticated %}
+             <a class="btn btn-default" href="{% url 'goal_edit' pk=goal.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a class="btn btn-default" href="{% url 'goal_delete' pk=goal.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
+        {% endif %}
+        <h1>{{ goal.title }}</h1>
+        <p> Status: {{ goal.is_completed|goal_status }}</p>
+        <p> Priority: {{ goal.priority }}</p>
+        <p>{{ goal.description|linebreaksbr }}</p>
+
+
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load tags %}
+
+{% block content %}
+
+<p> Add a new goal <a href="{% url 'goal_new' %}" ><span class="glyphicon glyphicon-plus"></span></a> </p>
+<form>
+
+    {{ form.non_field_errors }}
+                {% for field in form %}
+                          {{ field }}
+                    {% endfor %}
+    <button class="btn waves-effect waves-light amber accent-3 search-button" type="submit">Filter</button>
+</form>
+
+<br> <br>
+    {% for goal in goals %}
+        <div class="goal">
+            <div class="date">
+                <p>Due date: {{ goal.due_date }}</p>
+                 <p>Status: {{ goal.is_completed|goal_status }}</p>
+
+            </div>
+                <h1><a href="{% url 'goal_detail' pk=goal.pk %}">{{ goal.title }}</a></h1>            <p>{{ goal.description|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
