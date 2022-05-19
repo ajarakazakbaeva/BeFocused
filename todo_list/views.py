@@ -14,7 +14,7 @@ from django.shortcuts import redirect
 class UserRegistrationView(CreateView):
     template_name = 'registration/registration.html'
     form_class = UserCreationForm
-    success_url = reverse_lazy('goal_list')
+    success_url = reverse_lazy('about')
     def form_valid(self, form):
         result = super(UserRegistrationView, self).form_valid(form)
         cd = form.cleaned_data
@@ -32,9 +32,11 @@ def goal_list(request):
     if is_completed=='True':
         print('True')
         goals = Goal.objects.filter(created_date__lte=timezone.now(), author=user, is_completed = True).order_by('created_date')
-    else:
+    elif is_completed=='False':
         print('False')
         goals = Goal.objects.filter(created_date__lte=timezone.now(), author=user, is_completed = False).order_by('created_date')
+    else:
+        goals = Goal.objects.filter(created_date__lte=timezone.now(), author=user).order_by('created_date')
 
     return render(request, 'todo_list/goal_list.html', {'goals': goals, 'form':form, 'welcome_text': 'My Goals'})
 

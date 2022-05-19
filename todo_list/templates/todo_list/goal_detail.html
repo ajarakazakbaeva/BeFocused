@@ -6,7 +6,7 @@
     <div class="goal">
         {% if goal.created_date %}
             <div class="date">
-                {{ goal.created_date }}
+                created: {{ goal.created_date }}
             </div>
         {% endif %}
         {% if user.is_authenticated %}
@@ -16,7 +16,8 @@
         <h1>{{ goal.title }}</h1>
         <p> Status: {{ goal.is_completed|goal_status }}</p>
         <p> Priority: {{ goal.priority }}</p>
-        <p>{{ goal.description|linebreaksbr }}</p>
+        <p> Description: {{ goal.description|linebreaksbr }}</p>
+        <p> Due date: {{ goal.due_date }}</p>
 
 
     </div>
