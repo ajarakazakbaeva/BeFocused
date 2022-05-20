@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import django_heroku
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 import os
 from pathlib import Path
